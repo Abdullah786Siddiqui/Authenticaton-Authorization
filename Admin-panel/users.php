@@ -1,5 +1,7 @@
 <?php
-include("../dashboard.php");
+include("../Components/Header.html");
+include("./sidebar.php");
+
 ?>
 <main class="flex-grow-1 p-4 bg-light">
   <div class="container ">
@@ -15,6 +17,6 @@ include("../dashboard.php");
 </div>
 
 <?php
-include("../../../Components/Footer.html");
+include("../Components/Footer.html");
 
 ?>
