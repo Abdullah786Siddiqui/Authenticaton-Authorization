@@ -24,7 +24,7 @@ require "../config/Connection.php";
       </thead>
       <tbody>
         <?php
-        $sql = "SELECT * FROM products";
+        $sql = "SELECT * FROM products ORDER BY id";
         $result = $conn->query($sql);
         while ($row = $result->fetch_assoc()) {
 

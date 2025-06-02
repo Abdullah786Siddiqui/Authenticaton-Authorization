@@ -1,14 +1,15 @@
 <?php
 
 include("./dashboard.php");
-$insert_product = $_GET['add'] ?? " ";
+require "../config/Connection.php";
+
 ?>
 
 
 <div class="container ">
   <h2 class="text-center">Adding Product</h2>
   <main>
-    <?php if ($insert_product !== null): ?>
+    <!-- <?php if ($insert_product !== null): ?>
       <div id='insert' class="alert <?= ($insert_product === "true") ? "alert-success" : "alert-danger"; ?>">
         <?php
         if ($insert_product && $insert_product === "true") {
@@ -17,21 +18,9 @@ $insert_product = $_GET['add'] ?? " ";
           echo "Something went wrong";
         }
         ?>
-      </div>
-      <script>
-        // const url = new URL(window.location);
-        // url.searchParams.delete('add');
-        // window.history.replaceState({}, document.title, url);
-        setTimeout(() => {
-          let alert_insert = document.getElementById("insert")
-          if (alert_insert) {
-            let insert_msg = new bootstrap.Alert(alert_insert);
-            insert_msg.close();
-          }
-        }, 3000)
-      </script>
-    <?php endif; ?>
-    <form method="post" action="../Admin-panel/add_product_process.php" enctype="multipart/form-data">
+      
+    <?php endif; ?> -->
+    <form method="post" action="../Admin-panel/Add_products.php" enctype="multipart/form-data">
       <div class="mb-3">
         <label class="form-label">Title</label>
         <input type="text" class="form-control" name="title" placeholder="Enter a Product Title" required>
@@ -58,6 +47,37 @@ $insert_product = $_GET['add'] ?? " ";
 </div>
 </div>
 </main>
+<?php
+
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+  $title = $_POST['title'];
+  $description = $_POST['description'];
+  $price = $_POST['price'];
+
+
+  $imageName = $_FILES['image']['name'];
+  $tmpImage = $_FILES['image']['tmp_name'];
+  $uploadsDir = "./uploads/";
+  if (!is_dir($uploadsDir)) {
+    mkdir($uploadsDir);
+  }
+  $new_file = time() . "-" . basename($imageName);
+  $destination = $uploadsDir . $new_file;
+  if (move_uploaded_file($tmpImage, $destination)) {
+    $sql = "INSERT INTO  products(title,description,price,image) values ('$title','$description','$price','$new_file')";
+    $result = $conn->query($sql);
+    if ($result) {
+      echo "
+    <script>
+      alert('Your Product has been Added')
+    </script>";
+    } else {
+
+      echo "Error";
+    }
+  }
+}  ?>
+
 
 <?php
 include_once("../Components/Footer.html");

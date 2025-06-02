@@ -1,4 +1,6 @@
-<?php session_start();
+<?php 
+
+include("../config/auth_check.php");
 
 $username = $_SESSION['username'];
 
@@ -23,7 +25,7 @@ $fileName = basename($path);
           </svg>
           Products
         </a> </li>
-      <li class="nav-item"> <a href="./users.php" class="nav-link text-white cursor  <?php echo ($fileName  === "users.php" ) ? "active" : " " ?>" aria-current="page"> <svg class="bi pe-none me-2" width="16" height="16" aria-hidden="true">
+      <li class="nav-item"> <a href="./View_Users.php" class="nav-link text-white cursor  <?php echo ($fileName  === "users.php" || $fileName  === "View_Users.php" ) ? "active" : " " ?>" aria-current="page"> <svg class="bi pe-none me-2" width="16" height="16" aria-hidden="true">
             <use xlink:href="#home"></use>
           </svg>
           Users
@@ -34,7 +36,7 @@ $fileName = basename($path);
     <div class="dropdown"> <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"> <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2"> <strong><?= $username ?></strong> </a>
       <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
 
-        <li><a class="dropdown-item" href="../../../../Authentication_System/process/logout.php">Log out</a></li>
+        <li><a class="dropdown-item" href="../process/logout.php">Log out</a></li>
       </ul>
     </div>
 

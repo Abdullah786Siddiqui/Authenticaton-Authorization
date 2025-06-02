@@ -2,6 +2,7 @@
 include("../Components/Header.html");
 include("../View/navbar.php");
 
+
 $reset_password = isset($_GET['reset']) ? $_GET['reset'] : null;
 
 
