@@ -14,14 +14,15 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     if (password_verify($password, $hashed_Password)) {
       $_SESSION['email'] = $row['email'];
-      $_SESSION['username'] = $row['name'];
       $_SESSION['role'] = $row['role'];
 
       if ($row['role'] === "admin") {
-        header("Location: ../Admin-panel/dashboard.php");     
+        $_SESSION['admin_Username'] = $row['name'];
+        header("Location: ../Admin-panel/dashboard.php");
         exit();
       } else {
-        header("Location: ../View/profile.php");
+        $_SESSION['username'] = $row['name'];
+        header("Location: ../View/products.php");
         exit();
       }
     } else {

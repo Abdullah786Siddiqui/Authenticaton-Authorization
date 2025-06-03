@@ -1,8 +1,13 @@
-<?php 
+<?php
 
-include("../config/auth_check.php");
+session_start();
+if (!isset($_SESSION['admin_Username'])) {
+  header("Location: ../View/index.php");
+  exit();
+}
 
-$username = $_SESSION['username'];
+
+$username = $_SESSION['admin_Username'];
 
 $requestUri = $_SERVER['REQUEST_URI'];
 
@@ -20,12 +25,12 @@ $fileName = basename($path);
       </svg> <span class="fs-4">Admin Panel</span> </a>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto ">
-      <li class="nav-item "> <a href="./dashboard.php" class="nav-link text-white cursor <?php echo ($fileName  === "dashboard.php" || $fileName === "View_products.php" ||  $fileName === "Add_products.php"  ) ? "active" : " " ?> " aria-current="page"> <svg class="bi pe-none me-2 " width="16" height="16" aria-hidden="true">
+      <li class="nav-item "> <a href="./dashboard.php" class="nav-link text-white cursor <?php echo ($fileName  === "dashboard.php" || $fileName === "View_products.php" ||  $fileName === "Add_products.php") ? "active" : " " ?> " aria-current="page"> <svg class="bi pe-none me-2 " width="16" height="16" aria-hidden="true">
             <use xlink:href="#home"></use>
           </svg>
           Products
         </a> </li>
-      <li class="nav-item"> <a href="./View_Users.php" class="nav-link text-white cursor  <?php echo ($fileName  === "users.php" || $fileName  === "View_Users.php" ) ? "active" : " " ?>" aria-current="page"> <svg class="bi pe-none me-2" width="16" height="16" aria-hidden="true">
+      <li class="nav-item"> <a href="./View_Users.php" class="nav-link text-white cursor  <?php echo ($fileName  === "users.php" || $fileName  === "View_Users.php") ? "active" : " " ?>" aria-current="page"> <svg class="bi pe-none me-2" width="16" height="16" aria-hidden="true">
             <use xlink:href="#home"></use>
           </svg>
           Users
@@ -41,4 +46,3 @@ $fileName = basename($path);
     </div>
 
   </div>
-  
