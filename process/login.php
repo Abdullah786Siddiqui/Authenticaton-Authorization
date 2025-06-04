@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
   $sql = "SELECT * FROM users where email = '$email'";
   $result = $conn->query($sql);
   if ($row = $result->fetch_assoc()) {
-    $hashed_Password = $row['password'];
+    $hashed_Password = $row['PASSWORD'];
 
     if (password_verify($password, $hashed_Password)) {
       $_SESSION['email'] = $row['email'];

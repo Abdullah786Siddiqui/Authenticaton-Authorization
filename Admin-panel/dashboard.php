@@ -1,6 +1,6 @@
 <?php
 include("../Components/Header.html");
-include("./sidebar.php");
+include "./sidebar.php"
 
 ?>
 
